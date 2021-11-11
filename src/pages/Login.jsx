@@ -5,13 +5,17 @@ import { useForm } from "react-hook-form";
 import { UserLogin } from "../Store/Services/Login"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate  } from "react-router-dom"
-import { logoutClean } from "../Store/slices/login.slice"
+import { logoutClean } from "../Store/slices/login.slice";
+import LoadingContainer from "../Components/Loading";
+
 const schema = yup.object().shape({
   email: yup.string().email().required("please provide valid email.")
 });
 const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading } = useSelector((store) => store.userLogin)
+
   const { user } = useSelector(store => store.userLogin) ?? { user : null }
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
@@ -32,7 +36,7 @@ const Login = (props) => {
     navigate('/admin/register');
   }
  
-  console.log("propd",props);
+  console.log("propd",loading);
     return(<div className="container-fluid page-body-wrapper full-page-wrapper">
     <div className="content-wrapper d-flex align-items-center auth px-0">
       <div className="row w-100 mx-0">

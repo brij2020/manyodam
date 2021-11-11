@@ -9,8 +9,12 @@ const userLoginSlice = createSlice({
         }
     },
     extraReducers: {
+        [UserLogin.pending]: (state) => {
+            state.loading = true;
+        },
         [UserLogin.fulfilled]: (state, { type, payload }) => {
-        
+            state.loading = false;
+            
             if(payload?.status) {
                 window.sessionStorage.setItem("token",payload.token);
                 window.sessionStorage.setItem("loggedIN",true);

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { RegisterService } from "../Services/Register"
+import { loadingAction } from "../slices/loading.slice";
 
 const registerSlice = createSlice({
     name:"register",
@@ -8,7 +9,8 @@ const registerSlice = createSlice({
     reducers:{},
     extraReducers: { 
         [RegisterService.pending]: (state,action) => {
-            state.loading = true
+            state.loading = true;
+            // loadingAction(true)
         },
         [RegisterService.fulfilled]: (state,{ type, payload }) =>{
             state.newUser = payload;

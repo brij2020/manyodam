@@ -30594,4 +30594,10 @@ div.tagsinput span.tag a {
 .validationError {
 color: red;
 }
+.loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 9 !important;
+  }
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
