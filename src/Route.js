@@ -15,9 +15,9 @@ const InternalRoute = (props) => {
         <Route path="/admin/login" element={<Login />} />
           <Route exact path='/admin/login' element={<ProtectedRoute />}>
         </Route>
-        <Route path="/" element={<ProtectedRoute />} >
+        {/* <Route path="/" element={<ProtectedRoute />} > */}
          <Route exact path="/" element={<Main />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
       </Suspense>
     </BrowserRouter>
