@@ -11,7 +11,7 @@ const leftSideBarMenu = [
     isHover: false
   },
   {
-    name: "UI Elements",
+    name: "OTT Platform",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -19,33 +19,58 @@ const leftSideBarMenu = [
     iconClass: "icon-layout",
     submenu: [
         {
-          name: "sub menu",
+          name: "Video",
           isActive: true,
           dataToggle: "",
           isExpand: false,
         },
         {
-          name: "sub menu",
+          name: "Audio",
           isActive: true,
           dataToggle: "",
           isExpand: false,
         },
+        {
+          name: "Live",
+          isActive: true,
+          dataToggle: "",
+          isExpand: false,
+        }
       ],
       isHover: false
   },
   {
-    name: "Form Elements",
+    name: "E-com",
     isActive: false,
     dataToggle: "",
     isExpand: false,
     link: "javascript:void(0)" ,
     iconClass: "icon-columns",
-    submenu: [],
+    submenu: [
+      {
+        name: "Orders",
+        isActive: true,
+        dataToggle: "",
+        isExpand: false,
+      },
+      {
+        name: "Products",
+        isActive: true,
+        dataToggle: "",
+        isExpand: false,
+      },
+      {
+        name: "Sells",
+        isActive: true,
+        dataToggle: "",
+        isExpand: false,
+      }
+    ],
     isHover: false
 
   },
   {
-    name: "Charts",
+    name: "Charts to be discuss?",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -56,7 +81,7 @@ const leftSideBarMenu = [
 
   },
   {
-    name: "Icons",
+    name: "Settings",
     isActive: false,
     dataToggle: "",
     isExpand: false,
@@ -67,7 +92,7 @@ const leftSideBarMenu = [
 
   },
   {
-    name: "Users",
+    name: "Users List",
     isActive: false,
     dataToggle: "",
     isExpand: false,
