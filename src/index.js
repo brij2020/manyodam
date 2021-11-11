@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import LoadingContainer from "./Components/Loading"
 ReactDOM.render(
   <React.StrictMode>
-    <LoadingContainer>
+    {/* <LoadingContainer> */}
 
       <App />
-    </LoadingContainer>
+    {/* </LoadingContainer> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
