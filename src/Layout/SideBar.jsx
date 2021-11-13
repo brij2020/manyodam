@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { leftSideBarMenu } from "./menuList";
-import { v4 as uuidv4 } from "uuid";
 import { useNavigate  } from "react-router-dom"
 import  { rKey } from "../utill/"
 const Sidebar = (props) => {
@@ -27,6 +26,9 @@ const Sidebar = (props) => {
   };
   const handleTopage = (link) =>{
     navigate(link ?? "/")
+  }
+  const toEcom = ({ subLink }) => {
+    navigate(subLink ?? "/  ")
   }
   return (
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -65,7 +67,9 @@ const Sidebar = (props) => {
                   {sMenu.submenu.map((sub) => (
                     <li class="nav-item" key={rKey}>
                       {" "}
-                      <a class="nav-link" href="pages/ui-features/buttons.html">
+                      <a class="nav-link" href="javascript:void(0)" 
+                        onClick={ () => toEcom(sub) }
+                      >
                         {sub.name}
                       </a>
                     </li>

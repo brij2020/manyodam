@@ -52,18 +52,23 @@ const leftSideBarMenu = [
         isActive: true,
         dataToggle: "",
         isExpand: false,
+        subLink: "/orders"
+
       },
       {
         name: "Products",
         isActive: true,
         dataToggle: "",
         isExpand: false,
+        subLink: "/products"
       },
       {
         name: "Sells",
         isActive: true,
         dataToggle: "",
         isExpand: false,
+        subLink: "/sells"
+
       }
     ],
     isHover: false
