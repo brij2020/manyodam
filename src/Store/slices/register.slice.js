@@ -10,7 +10,7 @@ const registerSlice = createSlice({
     extraReducers: { 
         [RegisterService.pending]: (state,action) => {
             state.loading = true;
-            // loadingAction(true)
+            loadingAction(true)
         },
         [RegisterService.fulfilled]: (state,{ type, payload }) =>{
             state.newUser = payload;

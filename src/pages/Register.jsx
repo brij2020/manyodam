@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from  "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form"; 
 import { useDispatch, useSelector } from "react-redux"
 import { RegisterService } from "../Store/Services/Register"
+import Loader from "../Components/LoadingProp";
+import useAuth from "../hooks/Auth"
+
 const schema = yup.object().shape({
   name: yup.string().min(3).required("please provide valid user name."),
   email: yup.string().email().required("please provide valid email."),
@@ -17,7 +20,8 @@ const schema = yup.object().shape({
 const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+    const { isAuthenticated } = useAuth();
+    const { loading } = useSelector((store) => store.newUser);    
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
       resolver: yupResolver(schema),
     });
@@ -25,14 +29,20 @@ const Register = () => {
         console.log("tetst======")
         navigate('/admin/login');
     }
-
+    useEffect(() => {
+      if(isAuthenticated) {
+        navigate("/");
+      }
+    },[])
   const onSubmitHandler = (data) => {
     console.log("data",data)
     const data_  = {...data,...{type: "admin"} }
     dispatch(RegisterService(data_))                                   
   }
-  console.log("errors",errors)
+  console.log("errors",loading)
     return (<div className="container-scroller">
+    <Loader isLoading={ loading } />
+
     <div className="container-fluid page-body-wrapper full-page-wrapper">
       <div className="content-wrapper d-flex align-items-center auth px-0">
         <div className="row w-100 mx-0">

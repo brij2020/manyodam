@@ -4,7 +4,7 @@ const leftSideBarMenu = [
     isActive: true,
     dataToggle: "",
     isExpand: false,
-    link: "javascript:void(0)" ,
+    link: "/" ,
     iconClass: "icon-grid",
     subMenuid: "ui-basic",
     submenu:[],
@@ -96,7 +96,7 @@ const leftSideBarMenu = [
     isActive: false,
     dataToggle: "",
     isExpand: false,
-    link: "javascript:void(0)" ,
+    link: "/lists" ,
     iconClass: "icon-head ",
     submenu: [],
     isHover: false
