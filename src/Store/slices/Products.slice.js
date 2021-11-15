@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductsList } from "../Services/ProductsList"
+import { ProductsList,AddProduct } from "../Services/ProductsList"
 
 const ProductsListSlice = createSlice({
     name: "productslist",
@@ -21,4 +21,22 @@ const ProductsListSlice = createSlice({
     }
     
 })
-export default ProductsListSlice.reducer;
+export const productsListReducer  =  ProductsListSlice.reducer;
+
+const ProductCreateSlice = createSlice({
+    name: "createproduct",
+    reducers:{},
+    extraReducers:{
+        [AddProduct.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [AddProduct.fulfilled]: (state,action) => {
+            state.newproduct = action.payload;
+            state.loading = false
+        },
+        [AddProduct.rejected]: (state,action) =>{
+            state.loading = false
+        }    
+    }
+})
+export const ProductCreateReducer = ProductsListSlice.reducer;

@@ -4,14 +4,15 @@ import isDropDown from "./slices/dropDown.slice"
 import isUserLogin from "./slices/login.slice"
 import registerUser from "./slices/register.slice";
 import loadingSlice from "./slices/loading.slice"
-import productsListReducer from "./slices/Products.slice"
+import { productsListReducer,ProductCreateReducer } from "./slices/Products.slice"
 const rootReducer = combineReducers({
     sideBarToggle: toggleSideBarReducer,
     isDropDown: isDropDown,
     userLogin: isUserLogin,
     newUser: registerUser,
     isLoading: loadingSlice,
-    productsListReducer
+    productsListReducer,
+    ProductCreateReducer
 });
 
 export default rootReducer;
