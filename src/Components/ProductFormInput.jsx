@@ -22,12 +22,13 @@ export const schema = yup.object().shape({
 
 const FormInput = React.forwardRef((props, ref) => {
   const imgRef = useRef(null);
-  const { errorProps, setImage } = props;
+  const { errorProps, setImage, setPreviewUrl } = props;
   const handleImage = () => {
     imgRef.current.click();
   };
   const handleFileImage = e => {
-    setImage(e.target.files[0])
+    setImage(e.target.files[0]);
+    setPreviewUrl(e.target.files[0])
   }
   
   return (

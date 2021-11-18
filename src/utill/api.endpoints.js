@@ -5,5 +5,5 @@ export const LOGIN_API = "/auth/user/login";
 export const REGISTER_API = "/auth/user/new";
 export const PRODUCTS_LIST = "/products/lists"
 export const ADD_PRODUCT = "/products/add"
-export const IMAGE_UPLOAD = "/upload/"
+export const IMAGE_UPLOAD = "/upload/media"
 export const API_ADMIN_URL = API_HOST_URL + API_MIDD 

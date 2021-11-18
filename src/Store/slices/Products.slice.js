@@ -4,7 +4,12 @@ import { ProductsList,AddProduct } from "../Services/ProductsList"
 const ProductsListSlice = createSlice({
     name: "productslist",
     initialState:{loading: false,products:[]},
-    reducers:{},
+    reducers:{
+        pushNewProduct: (state,{ type, payload }) => {
+            console.log("new product data",payload)
+            state.products = payload
+        }
+    },
     extraReducers:{
         [ProductsList.pending]: (state,{ type, payload}) =>{
             state.loading = true
@@ -21,6 +26,7 @@ const ProductsListSlice = createSlice({
     }
     
 })
+export const { pushNewProduct } = ProductsListSlice.actions;
 export const productsListReducer  =  ProductsListSlice.reducer;
 
 const ProductCreateSlice = createSlice({

@@ -5,8 +5,9 @@ import { notify } from "../../utill/"
 export const uploadImage = createAsyncThunk(
     "uploadImage/services",
     async (req,thunkAPI) => {
+        const { frmData , pid } = req;
         try {
-        const res  = await axios.post(`${API_ADMIN_URL}${IMAGE_UPLOAD}`,req);
+        const res  = await axios.post(`${API_ADMIN_URL}${IMAGE_UPLOAD}?pid=${pid}`,frmData);
         if(res && res.data && res.data?.status) {
           //  notify("success", res.data?.message)
             return  res.data

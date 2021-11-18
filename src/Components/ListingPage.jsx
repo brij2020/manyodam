@@ -6,11 +6,14 @@ import FormInput,{ schema} from "./ProductFormInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { AddProduct } from "../Store/Services/ProductsList";
+import { pushNewProduct } from "../Store/slices/Products.slice.js"
+import { uploadImage } from "../Store/Services/ImageUpload"
 import Loader from "../Components/LoadingProp";
 import { useDispatch,useSelector } from "react-redux";
 
 const ListingPage = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { productTableData,tblHead, list} = props;
   const config = {
     mainHead: "User List",
     tblHead: ["User", "First Name", "Progress", "Amount", "Deadline"],
@@ -27,14 +30,41 @@ const ListingPage = (props) => {
     resolver: yupResolver(schema),
   });
   const [image,setImageForm] = useState(null);
+  const [preUrl, setPreview ] = useState(null);
   const { loading } = useSelector((store) => store.userLogin);
   const [isOpen, setIsOpen] = useState(false);
+  const setPriviewImageUrl = (file) => {
+  const objectUrl = URL.createObjectURL(file)
+  setPreview(objectUrl)
+  }
   const onSubmitHandler = (data) => {
-    
-    dispatch(AddProduct(data,dispatch))
+   dispatch(AddProduct(data, dispatch))
+   .then(response => {
+    console.log("response",preUrl)
+    const { payload:{ data:{ _id }}} = response
+    const imageForm = new FormData();
+    imageForm.append("image",image);
+    dispatch(uploadImage({frmData: imageForm, pid:_id}))
+    .then(d => {
+      const updateList = [...list]
+        updateList.push(Object.assign(response.payload.data,{pic_url: preUrl}))
+      dispatch(pushNewProduct(updateList))
+    })  
+    .catch(e => {
+      console.log("error",e)
+    })
+    setTimeout(() => { setIsOpen(false);clearForm(); },200)
+   })
+   .catch(e => {
+     console.log(e)
+   })
+   
+  }
+  const clearForm = () => {
+    reset()
   }
   const rKey = (Math.random() + 1).toString(36).substring(7);
-  console.log("errors",errors)
+  console.log("errors",productTableData)
   return (
     <>
       <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} position="right">
@@ -52,7 +82,7 @@ const ListingPage = (props) => {
                         class="close"
                         data-dismiss="modal"
                         aria-label="Close"
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={ () => { setIsOpen(!isOpen); clearForm() }}
                       >
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -62,12 +92,14 @@ const ListingPage = (props) => {
                         ref={register}
                         errorProps={errors}
                         setImage= { setImageForm}
+                        setPreviewUrl ={ setPriviewImageUrl }
                       /> 
               
                       <DrawerFooter 
                        isOpen={isOpen}
-
-                       setIsOpen={setIsOpen}/>
+                       clearFormProp ={ clearForm }
+                       setIsOpen={setIsOpen}
+                       />
                         
                     </form>
                   </div>
@@ -96,18 +128,18 @@ const ListingPage = (props) => {
 
                   <div class="table-responsive">
                     <table class="table table-striped">
-                      <thead>
+                      <thead> 
                         <tr>
-                          {config.tblHead.map((head) => (
+                          {tblHead && tblHead.length > 0 ? tblHead.map((head) => (
                             <th key={uuidv4() + rKey}>{head}</th>
-                          ))}
+                          )) : null }
                         </tr>
                       </thead>
                       <tbody>
-                        {[1, 2].map((li) => {
+                        { productTableData && productTableData.length > 0 && productTableData.map((li) => {
                           return (
                             <tr key={uuidv4() + rKey}>
-                              {config.cellData.map((cell, index) =>
+                              {li.cellData && li.cellData.map((cell, index) =>
                                 index === 0 ? (
                                   <td class="py-1">
                                     <img src={cell} alt={`user`} />

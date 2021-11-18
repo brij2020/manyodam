@@ -1,7 +1,7 @@
 import React from "react";
 
 const DrawerFooter = (props) => {
-  const { setIsOpen, isOpen } = props;
+  const { setIsOpen, isOpen, clearFormProp } = props;
   return (
     <div class="modal-footer text-center mt-4 font-weight-light">
       <button  type="submit" class="btn btn-primary">
@@ -11,7 +11,7 @@ const DrawerFooter = (props) => {
         type="button"
         class="btn btn-secondary"
         data-dismiss="modal"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={ () => { setIsOpen(!isOpen); clearFormProp(); }}
       >
         Close
       </button>
