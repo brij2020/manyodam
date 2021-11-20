@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { leftSideBarMenu } from "./menuList";
 import { useNavigate  } from "react-router-dom"
 import  { rKey } from "../utill/"
+
+
 const Sidebar = (props) => {
     const navigate = useNavigate();
     const [menuList, setMenuList] = useState(leftSideBarMenu);
@@ -47,11 +49,11 @@ const Sidebar = (props) => {
               className={`nav-link ${
                 sMenu.submenu.length > 0 ? "collapsed" : ""
               }`}
-              href="javascript:void(0)"
-              onClick={ () =>  handleTopage(sMenu?.link) }
+              href=" "
+              onClick={ (e) => { handleTopage(sMenu?.link); e.preventDefault() }}
               data-toggle="collapse"
               aria-expanded={sMenu?.isActive ? true : false}
-            >
+            > 
               <i className={`${sMenu?.iconClass} menu-icon`}></i>
               <span className="menu-title">{sMenu?.name}</span>
               {sMenu.submenu && sMenu.submenu.length > 0 ? (
@@ -67,8 +69,8 @@ const Sidebar = (props) => {
                   {sMenu.submenu.map((sub) => (
                     <li class="nav-item" key={rKey}>
                       {" "}
-                      <a class="nav-link" href="javascript:void(0)" 
-                        onClick={ () => toEcom(sub) }
+                      <a class="nav-link" href=" " 
+                        onClick={ (e) => {  toEcom(sub); e.preventDefault(); } }
                       >
                         {sub.name}
                       </a>

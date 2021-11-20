@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import * as yup from "yup";
 
 export const schema = yup.object().shape({
@@ -22,7 +22,7 @@ export const schema = yup.object().shape({
 
 const FormInput = React.forwardRef((props, ref) => {
   const imgRef = useRef(null);
-  const { errorProps, setImage, setPreviewUrl } = props;
+  const { errorProps, setImage, setPreviewUrl, editFormData, setValue } = props;
   const handleImage = () => {
     imgRef.current.click();
   };
@@ -30,6 +30,19 @@ const FormInput = React.forwardRef((props, ref) => {
     setImage(e.target.files[0]);
     setPreviewUrl(e.target.files[0])
   }
+  useEffect(() => {
+    if(editFormData) {
+      const { productname, pdescription, mrp, sellprice, _id } = editFormData;
+      console.log("editFormData",editFormData)
+      setValue("productname", productname);
+      setValue("pdescription", pdescription);
+      setValue("mrp", mrp);
+      setValue("sellprice", sellprice)
+      setValue("id", _id)
+
+    }
+  },[editFormData])
+  
   
   return (
     <>
@@ -41,7 +54,16 @@ const FormInput = React.forwardRef((props, ref) => {
           id="exampleInputName1"
           placeholder="product name"
           name="productname"
-          {...ref("productname", { required: true, message:"product nname", min:3 })}
+          {...ref("productname", { required: true, message:"product name is required", min:3 })}
+        />
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputName1"
+          placeholder="product name"
+          name="_id"
+          hidden
+          {...ref("id")}
         />
          { errorProps && errorProps?.productname  ? ( <span className="validationError">{ errorProps?.productname?.message }</span>) :(null) }
       </div>

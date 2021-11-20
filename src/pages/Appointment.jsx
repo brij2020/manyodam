@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ListingPage from "../Components/ListingPage";
 import Drawer from "../Components/Drawer";
 import { ProductsList } from "../Store/Services/ProductsList";
-const Products = (props) => {
+const Appointment = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { products=[], loading }= useSelector(store => store?.productsListReducer)
   const drawerOpen = {
@@ -18,26 +18,28 @@ const Products = (props) => {
     pageName: "",
     title: "",
   }
-   const pageInfo = {
-    pageTableTitle: "Products Listing",
-    pageTableDec: "all products listed",
-    pageName: "Products",
-    RbuttonName: "Add Products",
-    collectionName: "products"
-  }
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(ProductsList({collectiontype: pageInfo.collectionName}));
+    dispatch(ProductsList({collectiontype: "appointments"}));
   }, []);
-  let head = ["Product Image","Product Name", "MRP","Sell Price","Action"];
+  let head = ["Full Name","Email", "Mobile Number","Scheduled","Problem","Message","Action"];
   let productList = [];
-  let actions = []
+  let actions = [];
+  console.log("products",products)
   productList = products.length > 0 && products.map(pro => {
-    let cellData = [pro?.pic_url,pro?.productname,pro?.mrp,pro?.sellprice,[pro._id]]
+    let cellData = [pro?.fullname,pro?.email,pro?.mobileNmb,pro?.schedule,pro?.disorder,pro?.msg,[pro._id]]
     return Object.assign({},pro,{"cellData": cellData})
   }); 
 
- 
+  const pageInfo = {
+    pageTableTitle: "Appointment Listing",
+    pageTableDec: "all appointment listed",
+    pageName: "Appointment",
+    RbuttonName: "Add appointment",
+    collectionName: "appointments"
+
+
+  }
 
   return (
     <>
@@ -53,4 +55,4 @@ const Products = (props) => {
     </>
   );
 };
-export default Products;
+export default Appointment;

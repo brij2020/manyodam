@@ -31,3 +31,20 @@ export const notify = (state,msg) => {
 
     }
 }
+export const detectWord = (word) => {
+    if(typeof word === "string") {
+        const type = ['.png','.jpg','jpeg']
+        const dotIndex = word.lastIndexOf('.');
+        const ext = word.substring(dotIndex);
+        if(word.split(":").includes('blob')) {
+            console.log("test")
+            return true
+        }
+        return type.includes(ext);    
+    } else {
+        return true
+    }
+    
+}
+
+// blob:http://localhost:3000/9998a70b-2949-4670-8813-94dd288e36e7

@@ -6,9 +6,12 @@ const ProductsListSlice = createSlice({
     initialState:{loading: false,products:[]},
     reducers:{
         pushNewProduct: (state,{ type, payload }) => {
-            console.log("new product data",payload)
             state.products = payload
-        }
+        },
+        updateProduct: (state,{ type, payload}) => {
+            state.products = payload
+        },
+       
     },
     extraReducers:{
         [ProductsList.pending]: (state,{ type, payload}) =>{
@@ -26,7 +29,7 @@ const ProductsListSlice = createSlice({
     }
     
 })
-export const { pushNewProduct } = ProductsListSlice.actions;
+export const { pushNewProduct,updateProduct,removeProduct } = ProductsListSlice.actions;
 export const productsListReducer  =  ProductsListSlice.reducer;
 
 const ProductCreateSlice = createSlice({
@@ -46,3 +49,22 @@ const ProductCreateSlice = createSlice({
     }
 })
 export const ProductCreateReducer = ProductsListSlice.reducer;
+
+
+const RemoveProducts = createSlice({
+    name: "removeproducts",
+    reducers:{},
+    extraReducers:{
+        [AddProduct.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [AddProduct.fulfilled]: (state,action) => {
+            state.newproduct = action.payload;
+            state.loading = false
+        },
+        [AddProduct.rejected]: (state,action) =>{
+            state.loading = false
+        }    
+    }
+})
+export const RemoveProductsReducer =  RemoveProducts.reducer;

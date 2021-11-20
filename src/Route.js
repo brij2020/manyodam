@@ -14,7 +14,9 @@ const ListingPage = React.lazy(() => import("./Components/ListingPage"));
 const Setting = React.lazy(() => import("./Layout/Setting"));
 const SettingSideBar = React.lazy(() => import("./Layout/SettingSideBar"));
 const Sidebar = React.lazy(() => import("./Layout/SideBar"));
-const Products = React.lazy(() => import("./pages/Products"))
+const Products = React.lazy(() => import("./pages/Products"));
+const Appointment = React.lazy(() => import("./pages/Appointment"));
+const User = React.lazy(() => import("./pages/User"));
 const InternalRoute = (props) => {
   const { isAuthenticated } = useAuth();
   console.log("password", isAuthenticated);
@@ -42,7 +44,12 @@ const InternalRoute = (props) => {
                   <Route path="/products" element={<ProtectedRoute />} >
                     <Route path="/products" element={ <Products />} />
                   </Route>
-
+                  <Route path="/appointments" element={<ProtectedRoute />} >
+                    <Route path="/appointments" element={ <Appointment />} />
+                  </Route>
+                  <Route path="/users" element={<ProtectedRoute />} >
+                    <Route path="/users" element={ <User />} />
+                  </Route>
 
 
                   

@@ -6,6 +6,7 @@ import registerUser from "./slices/register.slice";
 import loadingSlice from "./slices/loading.slice"
 import { productsListReducer,ProductCreateReducer } from "./slices/Products.slice";
 import ImageUpload from "./slices/imapgeUpload.slice";
+import DrawerSlice from "./slices/drawer.slice"
 const rootReducer = combineReducers({
     sideBarToggle: toggleSideBarReducer,
     isDropDown: isDropDown,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     isLoading: loadingSlice,
     productsListReducer,
     ProductCreateReducer,
-    ImageUpload
+    ImageUpload,
+    DrawerSlice
 });
 
 export default rootReducer;
