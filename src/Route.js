@@ -41,20 +41,23 @@ const InternalRoute = (props) => {
                   <Route path="/lists" element={<ProtectedRoute />} >
                     <Route path="/lists" element={ <ListingPage />} />
                   </Route>
-                  <Route path="/products" element={<ProtectedRoute />} >
-                    <Route path="/products" element={ <Products />} />
+                  <Route path="/admin" element={<ProtectedRoute />} >
+                    <Route path="/admin/products" element={ <Products />} />
                   </Route>
-                  <Route path="/appointments" element={<ProtectedRoute />} >
-                    <Route path="/appointments" element={ <Appointment />} />
+                  <Route path="/admin" element={<ProtectedRoute />} >
+                    <Route path="/admin/appointments" element={ <Appointment />} />
                   </Route>
-                  <Route path="/users" element={<ProtectedRoute />} >
-                    <Route path="/users" element={ <User />} />
+                  <Route path="/admin" element={<ProtectedRoute />} >
+                    <Route path="/admin/users" element={ <User />} />
                   </Route>
 
 
                   
-                  <Route path="/" element={<ProtectedRoute />}>
-                    <Route exact path="/" element={<Main />} />
+                  <Route path="/admin" element={<ProtectedRoute />}>
+                    <Route exact path="/admin/dashboard" element={<Main />} />
+                  </Route>
+                  <Route path="/admin" element={<ProtectedRoute />}>
+                    <Route exact path="/admin/*" element={() => "404"} />
                   </Route>
                 </Routes>
               </Suspense>

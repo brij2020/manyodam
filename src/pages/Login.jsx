@@ -33,7 +33,7 @@ const Login = (props) => {
       if(user && user?.status && user.loginStatus === "undone") {
         dispatch(logoutClean(user))
        setTimeout(() => {
-        window.location.href = "/"
+        window.location.href = "/admin/dashbaord"
        },3000) 
       }
   },[user]);
